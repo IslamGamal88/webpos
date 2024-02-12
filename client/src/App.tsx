@@ -1,8 +1,15 @@
+import Login from "./Pages/Login";
+
 function App() {
   return (
-    <div className="container m-auto h-screen">
-      <h1>WebPOS</h1>
-    </div>
+    <section className="bg-gray-100 h-screen">
+      <div className="container m-auto py-4">
+        <h1 className="py-8 text-center text-4xl font-bold">
+          WebPOS
+        </h1>
+        <Login />
+      </div>
+    </section>
   );
 }
 

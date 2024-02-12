@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
+import { getCurrentDateTime } from 'src/utils/getCurrentDateTime';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +18,11 @@ export class AuthService {
         {
           username,
           password,
+        },
+        {
+          headers: {
+            'X-GIFTLOV-DATE': getCurrentDateTime(),
+          },
         },
       ),
     );
