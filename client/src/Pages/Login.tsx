@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import AuthContext from "../contexts/authContext";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [data, setData] = useState(null);
+
+  const { token, setToken } = useContext(AuthContext);
 
   const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     console.log("username,password", username, password);
     e.preventDefault();
-    const { data } = await axios.post(
-      "http://localhost:4000/auth/login",
-      {
-        username,
-        password,
-      }
-    );
-    setData(data);
-    console.log("data", data);
+    const {
+      data: { token },
+    } = await axios.post("http://localhost:4000/auth/login", {
+      username,
+      password,
+    });
+    setToken(token);
   };
 
   return (
@@ -61,7 +61,7 @@ function Login() {
           >
             Login
           </button>
-          {JSON.stringify(data)}
+          {JSON.stringify(token)}
         </form>
       </div>
     </div>

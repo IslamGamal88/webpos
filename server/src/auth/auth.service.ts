@@ -21,7 +21,7 @@ export class AuthService {
         },
         {
           headers: {
-            'X-GIFTLOV-DATE': getCurrentDateTime(),
+            'X-GIFTLOV-DATE': getCurrentDateTime(4),
           },
         },
       ),

@@ -1,33 +1,20 @@
-import React, {
-  PropsWithChildren,
-  createContext,
-  useState,
-} from "react";
+import { PropsWithChildren, createContext, useState } from "react";
 
-const AuthContext = createContext({
-  response: null,
+interface AuthContext {
+  token: string | null;
+  setToken: React.Dispatch<React.SetStateAction<null>>;
+}
+
+const AuthContext = createContext<AuthContext>({
   token: null,
   setToken: () => {},
-  setResponse: () => {},
 });
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [response, setResponse] = useState(null);
-  const [token, setToken] = useState<string | null>(null);
-
-  const updateToken = (newToken: string) => {
-    setToken(newToken);
-  };
-
-  const value = {
-    response,
-    setResponse,
-    token,
-    setToken: updateToken,
-  };
+  const [token, setToken] = useState(null);
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{ token, setToken }}>
       {children}
     </AuthContext.Provider>
   );
