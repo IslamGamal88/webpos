@@ -6,7 +6,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { token, setToken } = useContext(AuthContext);
+  const { setToken, expireDate } = useContext(AuthContext);
 
   const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     console.log("username,password", username, password);
@@ -18,6 +18,11 @@ function Login() {
       password,
     });
     setToken(token);
+    localStorage.setItem("token", token);
+    localStorage.setItem(
+      "expireDate",
+      expireDate ? expireDate.toString() : ""
+    );
   };
 
   return (
@@ -61,7 +66,6 @@ function Login() {
           >
             Login
           </button>
-          {JSON.stringify(token)}
         </form>
       </div>
     </div>

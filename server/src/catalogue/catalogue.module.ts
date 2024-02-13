@@ -1,13 +1,12 @@
-import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
+import { CatalogueService } from './catalogue.service';
+import { CatalogueController } from './catalogue.controller';
+import { HttpModule } from '@nestjs/axios';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
 import { getCurrentDateTime } from 'src/utils/getCurrentDateTime';
 
 @Module({
   imports: [
-    ConfigModule,
     HttpModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -21,7 +20,7 @@ import { getCurrentDateTime } from 'src/utils/getCurrentDateTime';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService, ConfigService],
+  providers: [CatalogueService],
+  controllers: [CatalogueController],
 })
-export class AuthModule {}
+export class CatalogueModule {}
