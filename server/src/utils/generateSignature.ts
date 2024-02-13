@@ -9,21 +9,15 @@ export const generateSignature = (
   secret: string,
   body?: object,
 ) => {
-  const sortedQueryParamsString = Object.values(queryParams)
-    .sort((a, b) => a.toString().localeCompare(b.toString()))
-    .join('');
+  const sortedQueryParamsString = Object.values(queryParams).sort().join('');
 
-  const sortedBodyString = body
-    ? Object.values(body)
-        .sort((a, b) => a.toString().localeCompare(b.toString()))
-        .join('')
-    : null;
+  const sortedBodyString = body ? Object.values(body).sort().join('') : null;
 
   const sortedResult = [sortedBodyString, sortedQueryParamsString]
     .sort()
     .join('');
 
-  const signature = `${url}${method.toUpperCase()}${sortedResult}${token}${getCurrentDateTime(4)}`;
+  const signature = `${url}${method.toUpperCase()}${sortedResult}${getCurrentDateTime(4)}${token}`;
 
   const signedSignature = createHmac('sha512', secret)
     .update(signature)

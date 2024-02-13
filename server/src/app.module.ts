@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { CatalogueModule } from './catalogue/catalogue.module';
 import { HttpModule } from '@nestjs/axios';
 import { CacheModule } from '@nestjs/cache-manager';
+import { CatalogueService } from './catalogue/catalogue.service';
 
 @Module({
   imports: [
@@ -22,6 +23,6 @@ import { CacheModule } from '@nestjs/cache-manager';
     CatalogueModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService],
+  providers: [AppService, AuthService, CatalogueService],
 })
 export class AppModule {}

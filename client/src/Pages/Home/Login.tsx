@@ -1,15 +1,16 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import AuthContext from "../contexts/authContext";
+import AuthContext from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { setToken, expireDate } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
-    console.log("username,password", username, password);
     e.preventDefault();
     const {
       data: { token },
@@ -23,6 +24,12 @@ function Login() {
       "expireDate",
       expireDate ? expireDate.toString() : ""
     );
+
+    setUsername("");
+    setPassword("");
+
+    // route to the catalogue page
+    navigate("/catalogue");
   };
 
   return (

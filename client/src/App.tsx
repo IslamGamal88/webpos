@@ -1,17 +1,15 @@
-import Login from "./Pages/Login";
+import Catalogue from "./Pages/Catalogue";
+import Home from "./Pages/Home";
 import { AuthProvider } from "./contexts/authContext";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <AuthProvider>
-      <section className="bg-gray-100 h-screen">
-        <div className="container m-auto py-4">
-          <h1 className="py-8 text-center text-4xl font-bold">
-            WebPOS
-          </h1>
-          <Login />
-        </div>
-      </section>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogue" element={<Catalogue />} />
+      </Routes>
     </AuthProvider>
   );
 }
